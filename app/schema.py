@@ -1,7 +1,9 @@
 from datetime import datetime
 from pydantic import BaseModel, EmailStr
 from typing import Optional
-from pydantic.types import conint
+# from pydantic.types import conint
+from typing_extensions import Annotated
+from pydantic import BaseModel, Field
 
 class PostBase(BaseModel):
     title : str
@@ -57,4 +59,4 @@ class Vote(BaseModel):
     # voted, so it will vote post
     # however, if dir = 0, and the post is voted , so it will
     #r remove the vote from the post, and so on checks like it
-    dir: conint(ge=0,le=1)  # type: ignore
+    dir: Annotated[int, Field(strict=True, ge=0,le=1)]
